@@ -1,0 +1,192 @@
+<script type="text/javascript" src="assets/js/core.js" ></script>
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js" ></script>
+  <script type="text/javascript" src="assets/js/theme.js" ></script>
+  <script type="text/javascript" src="assets/js/dist/front.js" ></script>
+  <script type="text/javascript" src="assets/js/ps_emailsubscription.js" ></script>
+  <script type="text/javascript" src="assets/js/mailalerts.js" ></script>
+  <script type="text/javascript" src="assets/js/conversion-api.js" ></script>
+  <script type="text/javascript" src="assets/js/jquery.rating.plugin.js" ></script>
+  <script type="text/javascript" src="assets/js/productListingComments.js" ></script>
+  <script type="text/javascript" src="assets/js/GoogleAnalyticActionLib.js" ></script>
+  <script type="text/javascript" src="assets/js/owl.carousel.js" ></script>
+  <script type="text/javascript" src="assets/js/jquery.elevatezoom.js" ></script>
+  <script type="text/javascript" src="assets/js/jquery.imagesloaded.min.js" ></script>
+  <script type="text/javascript" src="assets/js/lightbox-2.6.min.js" ></script>
+  <script type="text/javascript" src="assets/js/slick.js" ></script>
+  <script type="text/javascript" src="assets/js/slick.min.js" ></script>
+  <script type="text/javascript" src="assets/js/wbblocksearch.js" ></script>
+  <script type="text/javascript" src="assets/js/front.js" ></script>
+  <script type="text/javascript" src="assets/js/product.bundle.js" ></script>
+  <script type="text/javascript" src="assets/js/jquery.cooki-plugin.js" ></script>
+  <script type="text/javascript" src="assets/js/jquery.autocomplete.js" ></script>
+  <script type="text/javascript" src="assets/js/ps_searchbar.js" ></script>
+  <script type="text/javascript" src="assets/js/responsiveslides.min.js" ></script>
+  <script type="text/javascript" src="assets/js/homeslider.js" ></script>
+  <script type="text/javascript" src="assets/js/graphql.js" ></script>
+  <script type="text/javascript" src="assets/js/vendors.js" ></script>
+  <script type="text/javascript" src="assets/js/custom.js" ></script>
+
+
+    
+
+    
+<script type="text/javascript">
+  var time_start;
+  $(window).on("load", function (e) {
+    time_start = new Date();
+  });
+  $(window).on("unload", function (e) {
+    var time_end = new Date();
+    var pagetime = new FormData();
+    pagetime.append("type", "pagetime");
+    pagetime.append("id_connections", "3268220");
+    pagetime.append("id_page", "1");
+    pagetime.append("time_start", "2024-12-01 10:08:58");
+    pagetime.append("token", "8e3bbf550fa981c0b041809d12e08cee78aae773");
+    pagetime.append("time", time_end-time_start);
+    pagetime.append("ajax", "1");
+    navigator.sendBeacon("https://alaseel.nl/ar/index.php?controller=statistics", pagetime);
+  });
+</script> 
+
+
+
+
+<script>
+  var login_ajax_url = 'https://alaseel.nl/ar/module/phenixmobileconnector/customer';
+  function SendToApp(msg)
+  {
+    Print.postMessage(msg);
+  }
+
+  function appinit()
+  {
+    var ua = navigator.userAgent;
+    
+      if ((navigator.userAgent.indexOf("phenixwebshop") == -1) && (prestashop.customer.email != 'joudyalmoh@gmail.com'))
+      {
+          return;
+      }
+    $('.header-top > .container:first').remove();
+    
+    $('#_desktop_language_selector').remove();
+    $('#_desktop_currency_selector').remove();
+    $('#_mobile_logo').remove();
+    $('#_mobile_language_selector').remove();
+    $('#_mobile_user_info').remove();
+    $('#menu-icon').remove();
+    
+
+    
+  }
+
+  function getcustomer()
+  {
+    SendToApp(JSON.stringify(prestashop.customer));
+  }
+
+  function testfunction(data)
+  {
+    SendToApp(data+10);
+  }
+
+  function customersignin(username,pass)
+  {
+
+    var result='';
+    var request = $.ajax({
+        url: login_ajax_url,
+        headers: {"cache-control": "no-cache"},
+        method: "POST",
+        dataType: "html",
+        cache: false,
+        data:{
+            "action":"customer-login",
+            "email_login":username,
+            "pass_login":pass
+        },
+        async : false
+      });
+      request.fail(function( jqXHR, textStatus ) {
+        alert( "Request failed: " + textStatus );
+      });
+      request.done(function( msg ) {
+        result = msg.trim();
+      });
+    SendToApp(result);
+  }
+
+  function customersocialsignin(email,first_name,last_name)
+  {
+
+    var result='';
+    var request = $.ajax({
+        url: login_ajax_url,
+        headers: {"cache-control": "no-cache"},
+        method: "POST",
+        dataType: "html",
+        cache: false,
+        data:{
+            "action":"social-login",
+            "email":email,          
+            "first_name":first_name,
+            "last_name":last_name
+        },
+        async : false
+      });
+      request.fail(function( jqXHR, textStatus ) {
+        alert( "Request failed: " + textStatus );
+      });
+      request.done(function( msg ) {
+        result = msg.trim();
+      });
+    SendToApp(result);
+  }
+
+  function getlinks()
+  {
+    var links = [];
+    var newlink = {};
+    newlink.name = 'login';
+    newlink.url = 'https://alaseel.nl/ar/my-account';
+    links.push(newlink);
+    newlink = {};
+    newlink.name = 'logout';
+    newlink.url = 'https://alaseel.nl/ar/?mylogout=';
+    links.push(newlink);
+    newlink = {};
+    newlink.name = 'history';
+    newlink.url = 'https://alaseel.nl/ar/سجل طلبات الشراء';
+    links.push(newlink);
+    newlink = {};
+    newlink.name = 'terms';
+    newlink.url = 'https://alaseel.nl/ar/content/3-terms-and-conditions-of-use';
+    links.push(newlink);
+    newlink = {};
+    newlink.name = 'contact';
+    newlink.url = 'https://alaseel.nl/ar/اتصل بنا';
+    links.push(newlink);
+    SendToApp(JSON.stringify(links));
+  }
+
+
+  $(window).ready(function() {
+    appinit();
+  });
+
+  $('#wrapper').append('<style type="text/css">@media screen and (min-width:0px) and (max-width:575px){.container { max-width: 100%}.products > article.col-xs-12 {float: left;width: 50%;}.tvtimer-wrapper{position:relative;bottom:55px}#tvcmstab-new-product .tvproduct-wrapper .tvproduct-hover-btn{bottom:140px}.tvproduct-name{min-height:0px!important;max-height: 80px;}</style>');
+  // if ($(window).width() <= 575){
+  //     $('#wrapper > .container').css("max-width",'100%');
+  //     $('.products > article.item').css({'float':'left','width':'50%'});
+  // }
+
+
+  $(".whatsappchat-anchor").on("click",function(){
+	 if ((navigator.userAgent.indexOf("phenixwebshop") != -1))
+		{
+			$(this).removeAttr("href");
+			Print.postMessage('{"type":"success","message":"open Whatsapp","num":"+96522279977"}');
+		}
+	})
+</script>
+
